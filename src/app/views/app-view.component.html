@@ -95,41 +95,41 @@
 
 			<form class="form">
 
-				<div class="form__field">
-					<div class="form__field-label form__field-label--version">
-						Version:
-					</div>
-					<div class="form__field-body">
+<!--				<div class="form__field">-->
+<!--					<div class="form__field-label form__field-label&#45;&#45;version">-->
+<!--						Version:-->
+<!--					</div>-->
+<!--					<div class="form__field-body">-->
 
-						<div class="versions">
-							<span
-								(click)="useVersion( 'general' )"
-								class="versions__version"
-								[class.versions__version--off]="( form.version !== 'general' )"
-								[class.versions__version--on]="( form.version === 'general' )">
-								General Version
-							</span>
-							<span
-								(click)="useVersion( 'invision' )"
-								class="versions__version versions__version--on"
-								[class.versions__version--off]="( form.version !== 'invision' )"
-								[class.versions__version--on]="( form.version === 'invision' )">
-								InVision Version
-							</span>
-							<span
-								*ngIf="( form.version === 'invision' )"
-								(click)="prepareRCA()"
-								class="versions__prepare">
-								Prepare Root Cause Analysis (RCA)
-							</span>
-						</div>
+<!--						<div class="versions">-->
+<!--							<span-->
+<!--								(click)="useVersion( 'general' )"-->
+<!--								class="versions__version"-->
+<!--								[class.versions__version&#45;&#45;off]="( form.version !== 'general' )"-->
+<!--								[class.versions__version&#45;&#45;on]="( form.version === 'general' )">-->
+<!--								General Version-->
+<!--							</span>-->
+<!--							<span-->
+<!--								(click)="useVersion( 'invision' )"-->
+<!--								class="versions__version versions__version&#45;&#45;on"-->
+<!--								[class.versions__version&#45;&#45;off]="( form.version !== 'invision' )"-->
+<!--								[class.versions__version&#45;&#45;on]="( form.version === 'invision' )">-->
+<!--								InVision Version-->
+<!--							</span>-->
+<!--							<span-->
+<!--								*ngIf="( form.version === 'invision' )"-->
+<!--								(click)="prepareRCA()"-->
+<!--								class="versions__prepare">-->
+<!--								Prepare Root Cause Analysis (RCA)-->
+<!--							</span>-->
+<!--						</div>-->
 
-					</div>
-				</div>
+<!--					</div>-->
+<!--				</div>-->
 
 				<div class="form__field">
 					<div class="form__field-label">
-						Description:
+						User Impact:
 					</div>
 					<div class="form__field-body">
 
@@ -138,56 +138,56 @@
 					</div>
 				</div>
 
-				<ng-template [ngIf]="( form.version === 'invision' )">
+<!--				<ng-template [ngIf]="( form.version === 'invision' )">-->
 
-					<div class="form__field">
-						<div class="form__field-label">
-							Customers:
-						</div>
-						<div class="form__field-body customers">
+<!--					<div class="form__field">-->
+<!--						<div class="form__field-label">-->
+<!--							Customers:-->
+<!--						</div>-->
+<!--						<div class="form__field-body customers">-->
 
-							<div class="customers__item">
-								<input type="text" name="customerType" [(ngModel)]="form.customerType" (ngModelChange)="applyForm()" class="customers__input" />
-								<div class="customers__note">
-									<span class="customers__label">Type of Customers:</span>
-									<span class="customers__values">None | Internal | MT | PC | Marketing </span>
-								</div>
-							</div>
+<!--							<div class="customers__item">-->
+<!--								<input type="text" name="customerType" [(ngModel)]="form.customerType" (ngModelChange)="applyForm()" class="customers__input" />-->
+<!--								<div class="customers__note">-->
+<!--									<span class="customers__label">Type of Customers:</span>-->
+<!--									<span class="customers__values">None | Internal | MT | PC | Marketing </span>-->
+<!--								</div>-->
+<!--							</div>-->
 
-							<div class="customers__item">
-								<input type="text" name="customerCount" [(ngModel)]="form.customerCount" (ngModelChange)="applyForm()" class="customers__input" />
-								<div class="customers__note">
-									<span class="customers__label">Number Affected:</span>
-									<span class="customers__values">None (0%) | Some (anything between 0% - 100%) | All (100%)</span>
-								</div>
-							</div>
+<!--							<div class="customers__item">-->
+<!--								<input type="text" name="customerCount" [(ngModel)]="form.customerCount" (ngModelChange)="applyForm()" class="customers__input" />-->
+<!--								<div class="customers__note">-->
+<!--									<span class="customers__label">Number Affected:</span>-->
+<!--									<span class="customers__values">None (0%) | Some (anything between 0% - 100%) | All (100%)</span>-->
+<!--								</div>-->
+<!--							</div>-->
 
-						</div>
-					</div>
-					<div class="form__field">
-						<div class="form__field-label">
-							Internal:
-						</div>
-						<div class="form__field-body internal">
+<!--						</div>-->
+<!--					</div>-->
+<!--					<div class="form__field">-->
+<!--						<div class="form__field-label">-->
+<!--							Internal:-->
+<!--						</div>-->
+<!--						<div class="form__field-body internal">-->
 
-							<div class="internal__item">
-								<input type="text" name="internalTeam" [(ngModel)]="form.internalTeam" (ngModelChange)="applyForm()" class="internal__input" />
-								<div class="internal__note">
-									<span class="internal__label">Team Performing Investigation / Writing RCA</span>
-								</div>
-							</div>
+<!--							<div class="internal__item">-->
+<!--								<input type="text" name="internalTeam" [(ngModel)]="form.internalTeam" (ngModelChange)="applyForm()" class="internal__input" />-->
+<!--								<div class="internal__note">-->
+<!--									<span class="internal__label">Team Performing Investigation / Writing RCA</span>-->
+<!--								</div>-->
+<!--							</div>-->
 
-							<div class="internal__item">
-								<input type="text" name="zendeskTicket" [(ngModel)]="form.zendeskTicket" (ngModelChange)="applyForm()" class="internal__input" />
-								<div class="internal__note">
-									<span class="internal__label">Zendesk Ticket</span>
-								</div>
-							</div>
+<!--							<div class="internal__item">-->
+<!--								<input type="text" name="zendeskTicket" [(ngModel)]="form.zendeskTicket" (ngModelChange)="applyForm()" class="internal__input" />-->
+<!--								<div class="internal__note">-->
+<!--									<span class="internal__label">Zendesk Ticket</span>-->
+<!--								</div>-->
+<!--							</div>-->
 
-						</div>
-					</div>
+<!--						</div>-->
+<!--					</div>-->
 
-				</ng-template>
+<!--				</ng-template>-->
 
 				<ng-template [ngIf]="( form.version === 'general' )">
 

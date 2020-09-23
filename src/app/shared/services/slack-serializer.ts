@@ -61,7 +61,7 @@ export class SlackSerializer {
 
 		}
 
-		parts.push( `*Timeline*: \`https://www.incident-commander.com/#${ incident.id }\` ` );
+		parts.push( `*Timeline*: \`https://ps-incident.netlify.app/#${ incident.id }\` ` );
 
 		var visibleUpdates = incident.updates.slice( -updateLimit );
 
@@ -151,7 +151,7 @@ export class SlackSerializer {
 		//
 		// }
 
-		parts.push( `<strong>Timeline</strong>: https://localhost:4200/#${ incident.id } ` );
+		parts.push( `<strong>Timeline</strong>: https://ps-incident.netlify.app/#${ incident.id } ` );
 
 		var visibleUpdates = incident.updates.slice( -updateLimit );
 

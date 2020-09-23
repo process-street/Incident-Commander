@@ -247,7 +247,7 @@ export class RcaSerializer {
 		var lines: Lines = [];
 		var dayLabel = "";
 
-		lines.push( `## [Timeline (${ timezone.name })](https://www.incident-commander.com/#${ incident.id })` );
+		lines.push( `## [Timeline (${ timezone.name })](https://ps-incident.netlify.app/#${ incident.id })` );
 
 		// As we loop over the updates, we want to break them up into day-based buckets.
 		for ( var update of incident.updates ) {

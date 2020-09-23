@@ -125,23 +125,23 @@ export class IncidentService {
 
 		return([
 			{
-				id: "P1",
+				id: "L1",
 				description: "All customers are affected by outage, vulnerability, or performance degradation."
 			},
 			{
-				id: "P2",
+				id: "L2",
 				description: "Large segment of customers are affected by outage, vulnerability, or performance degradation."
 			},
 			{
-				id: "P3",
+				id: "L3",
 				description: "Small segment of customers are affected by outage, vulnerability, or performance degradation."
 			},
 			{
-				id: "P4",
+				id: "L4",
 				description: "Site performance degraded for some customers."
 			},
 			{
-				id: "P5",
+				id: "L5",
 				description: "Potential issue, but customers are currently unaware."
 			}
 		]);
@@ -211,7 +211,7 @@ export class IncidentService {
 			status: statuses[ 0 ],
 			startedAt: new Date(),
 			timezoneID: timezoneID,
-			videoLink: `https://hangouts.google.com/hangouts/_/invisionapp.com/${ name }`,
+			videoLink: "",
 			updates: []
 		}
 
