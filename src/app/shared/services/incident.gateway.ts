@@ -48,12 +48,13 @@ export class IncidentGateway {
 	constructor() {
 
 		this.firebaseApp = firebase.initializeApp({
-			apiKey: "AIzaSyAS8JEXbdmEQyn_IRHCOiJwr3ewhmo3Y7s",
-			authDomain: "incident-commander.firebaseapp.com",
-			databaseURL: "https://incident-commander.firebaseio.com",
-			projectId: "incident-commander",
-			storageBucket: "incident-commander.appspot.com",
-			messagingSenderId: "1043941703596"
+			apiKey: "AIzaSyBPzPOWriDwpu67RFY8rWW2KYdyWSyzWsY",
+			authDomain: "incident-commander-b2f79.firebaseapp.com",
+			databaseURL: "https://incident-commander-b2f79.firebaseio.com",
+			projectId: "incident-commander-b2f79",
+			storageBucket: "incident-commander-b2f79.appspot.com",
+			messagingSenderId: "16391349360",
+			appId: "1:16391349360:web:60c299e67fa72a2fac40b5"
 		});
 		this.firebaseDB = this.firebaseApp.database();
 
