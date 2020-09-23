@@ -24,6 +24,18 @@ export class ClipboardService {
 	// PUBLIC METHODS.
 	// ---
 
+	// See: https://stackoverflow.com/questions/23934656/javascript-copy-rich-text-contents-to-clipboard
+	public richCopy( str: string ) : void {
+		function listener(e) {
+			e.clipboardData.setData("text/html", str);
+			e.clipboardData.setData("text/plain", str);
+			e.preventDefault();
+		}
+		document.addEventListener("copy", listener);
+		document.execCommand("copy");
+		document.removeEventListener("copy", listener);
+	}
+
 	public async copy( value: string ) : Promise<string> {
 
 		var textarea: HTMLTextAreaElement = null;

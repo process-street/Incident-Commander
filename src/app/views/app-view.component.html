@@ -236,7 +236,7 @@
 
 				<div class="form__field">
 					<div class="form__field-label">
-						Update:
+						Status Update:
 					</div>
 					<div class="form__field-body form__field-body--select add-update">
 
@@ -288,8 +288,17 @@
 							</option>
 						</select>
 
-						<textarea #slackRef [readonly]="true" [value]="form.slack" (click)="slackRef.select()" class="slack__content"></textarea>
+						<textarea #slackRef [readonly]="true" [value]="form.slackMarkdown" (click)="slackRef.select()" class="slack__content"></textarea>
 
+						<button type="button" (click)="copyPlainToClipboard()">
+							Copy Plain Text To Clipboard
+						</button>
+
+						<div name="slackHTML" [innerHTML]= form.slackHTML></div>
+
+						<button type="button" (click)="copyRichToClipboard()">
+							Copy Rich Text To Clipboard
+						</button>
 					</div>
 				</div>
 

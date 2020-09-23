@@ -57,7 +57,8 @@ export class AppViewComponent implements OnInit {
 		slackSize: number;
 		slackFormat: string;
 		slackTimezone: Timezone;
-		slack: string;
+		slackMarkdown: string;
+		slackHTML: string
 	};
 	public globalInsight: string;
 	public incident: Incident;
@@ -128,7 +129,8 @@ export class AppViewComponent implements OnInit {
 			slackSize: 5,
 			slackFormat: "compact",
 			slackTimezone: this.getDefaultTimezone(),
-			slack: ""
+			slackMarkdown: "",
+			slackHTML: ""
 		};
 
 		this.editForm = {
@@ -181,7 +183,8 @@ export class AppViewComponent implements OnInit {
 		this.incident.updates.sort( this.sortCreatedAtDesc );
 
 		// Optimistically update the Slack message formatting.
-		this.form.slack = this.slackSerializer.serialize( this.incident, this.form.slackSize, this.form.slackFormat, this.form.slackTimezone );
+		this.form.slackMarkdown = this.slackSerializer.serializeMarkdown( this.incident, this.form.slackSize, this.form.slackFormat, this.form.slackTimezone );
+		this.form.slackHTML = this.slackSerializer.serializeHTML( this.incident, this.form.slackSize, this.form.slackFormat, this.form.slackTimezone );
 
 		// Reset the content, but leave the status selection - it will likely be used by
 		// the subsequent updates.
@@ -191,7 +194,14 @@ export class AppViewComponent implements OnInit {
 		this.incidentService.saveIncident( this.incident );
 
 		// For convenience, copy the slack message directly to the user's clipboard.
-		this.clipboardService.copy( this.form.slack ).then(
+		// TODO: Preference toggle between rich text and plain text
+		this.copyRichToClipboard();
+
+	}
+
+	public copyPlainToClipboard() : void {
+
+		this.clipboardService.copy( this.form.slackMarkdown ).then(
 			( value: string ) : void => {
 
 				this.setGlobalInsight( "Slack message copied to clipboard." );
@@ -204,9 +214,14 @@ export class AppViewComponent implements OnInit {
 
 			}
 		);
-
 	}
 
+	public copyRichToClipboard() : void {
+
+		this.clipboardService.richCopy(this.form.slackHTML);
+
+		this.setGlobalInsight( "Slack message copied to clipboard." );
+	}
 
 	// I re-apply the form changes to the incident.
 	public applyForm() : void {
@@ -228,7 +243,8 @@ export class AppViewComponent implements OnInit {
 		this.incident.videoLink = this.form.videoLink;
 
 		// Optimistically update the Slack message formatting.
-		this.form.slack = this.slackSerializer.serialize( this.incident, this.form.slackSize, this.form.slackFormat, this.form.slackTimezone );
+		this.form.slackMarkdown = this.slackSerializer.serializeMarkdown( this.incident, this.form.slackSize, this.form.slackFormat, this.form.slackTimezone );
+		this.form.slackHTML = this.slackSerializer.serializeHTML( this.incident, this.form.slackSize, this.form.slackFormat, this.form.slackTimezone );
 
 		this.updateDuration();
 		this.updateTitle();
@@ -301,7 +317,8 @@ export class AppViewComponent implements OnInit {
 		this.incident.updates = _.without( this.incident.updates, update );
 
 		// Optimistically update the Slack message formatting.
-		this.form.slack = this.slackSerializer.serialize( this.incident, this.form.slackSize, this.form.slackFormat, this.form.slackTimezone );
+		this.form.slackMarkdown = this.slackSerializer.serializeMarkdown( this.incident, this.form.slackSize, this.form.slackFormat, this.form.slackTimezone );
+		this.form.slackHTML = this.slackSerializer.serializeHTML( this.incident, this.form.slackSize, this.form.slackFormat, this.form.slackTimezone );
 
 		// Finally, persist the incident changes.
 		this.incidentService.saveIncident( this.incident );
@@ -384,7 +401,8 @@ export class AppViewComponent implements OnInit {
 		}
 
 		// Optimistically update the Slack message formatting.
-		this.form.slack = this.slackSerializer.serialize( this.incident, this.form.slackSize, this.form.slackFormat, this.form.slackTimezone );
+		this.form.slackMarkdown = this.slackSerializer.serializeMarkdown( this.incident, this.form.slackSize, this.form.slackFormat, this.form.slackTimezone );
+		this.form.slackHTML = this.slackSerializer.serializeHTML( this.incident, this.form.slackSize, this.form.slackFormat, this.form.slackTimezone );
 
 		this.editForm.update = null;
 
@@ -456,8 +474,8 @@ export class AppViewComponent implements OnInit {
 					this.form.videoLink = this.incident.videoLink;
 					this.form.updateStatusID = this.statuses[ 0 ].id;
 					this.form.updateDescription = "";
-					this.form.slack = this.slackSerializer.serialize( this.incident, this.form.slackSize, this.form.slackFormat, this.form.slackTimezone );
-
+					this.form.slackMarkdown = this.slackSerializer.serializeMarkdown( this.incident, this.form.slackSize, this.form.slackFormat, this.form.slackTimezone );
+					this.form.slackHTML = this.slackSerializer.serializeHTML( this.incident, this.form.slackSize, this.form.slackFormat, this.form.slackTimezone );
 
 					// While this has nothing to do with the incident, let's cycle the 
 					// header quote whenever a new incident is started.
@@ -549,7 +567,8 @@ export class AppViewComponent implements OnInit {
 							id: ( this.incident.timezoneID || this.form.slackTimezone.id )
 						}
 					);
-					this.form.slack = this.slackSerializer.serialize( this.incident, this.form.slackSize, this.form.slackFormat, this.form.slackTimezone );
+					this.form.slackMarkdown = this.slackSerializer.serializeMarkdown( this.incident, this.form.slackSize, this.form.slackFormat, this.form.slackTimezone );
+					this.form.slackHTML = this.slackSerializer.serializeHTML( this.incident, this.form.slackSize, this.form.slackFormat, this.form.slackTimezone );
 
 					// While this has nothing to do with the incident, let's cycle the 
 					// header quote whenever a new incident is started.
@@ -770,7 +789,8 @@ export class AppViewComponent implements OnInit {
 							id: ( this.incident.timezoneID || this.form.slackTimezone.id )
 						}
 					);
-					this.form.slack = this.slackSerializer.serialize( this.incident, this.form.slackSize, this.form.slackFormat, this.form.slackTimezone );
+					this.form.slackMarkdown = this.slackSerializer.serializeMarkdown( this.incident, this.form.slackSize, this.form.slackFormat, this.form.slackTimezone );
+					this.form.slackHTML = this.slackSerializer.serializeHTML( this.incident, this.form.slackSize, this.form.slackFormat, this.form.slackTimezone );
 
 					this.updateDuration();
 					this.updateTitle();
